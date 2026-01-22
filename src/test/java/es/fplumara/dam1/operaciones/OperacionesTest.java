@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,10 +44,22 @@ public class OperacionesTest {
     }
 
 
-    //@ParameterizedTest
-    // @MethodSource();
-    //@DisplayName("Comprobar que hace la media")
-    //  void comprobarMedia(){}
+    @ParameterizedTest
+    @MethodSource("medias")
+    @DisplayName("Comprobar que hace la media")
+     void comprobarMedia(double esperado,double... notas){
+        double resultado = Operaciones.media(notas);
+        assertEquals(esperado, resultado,0.0001);
+    }
+
+    static Stream <Arguments> medias(){
+       return Stream.of(
+               Arguments.of(3.5, new double[]{3.0,4.0}),
+               Arguments.of(7.5, new double[] {8.0,7.0}),
+               Arguments.of(10, new double[]{10}),
+               Arguments.of(7.8, new double[]{7,8,8,8.2})
+       );
+    }
 
     @Test
     @DisplayName("Comprobar el método media")
@@ -57,7 +72,7 @@ public class OperacionesTest {
     }
 
     @Test
-    @DisplayName("Comrpobar IllegalArgumentException cuando llaman sin notas o se pasa null")
+    @DisplayName("Comprobar IllegalArgumentException cuando llaman sin notas o se pasa null")
     void comprobarDatosNulos() {
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
             Operaciones.media(null);
