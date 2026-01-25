@@ -75,7 +75,14 @@ public class CocheServiceTest {
     @Test
     @DisplayName("buscarCoche devuelve lo que devuelve el repositorio")
     void buscarCocheDevuelveInfoRepositorio (){
-
+        String matricula = "1234ABC";
+        Coche coche = new Coche();
+        coche.setMatricula(matricula);
+        when(cocheRepository.findByMatricula(matricula)) .thenReturn(coche);
+        Coche resultado = cocheService.buscarCoche(matricula);
+        assertEquals(coche, resultado);
+        verify(cocheRepository,times(1)).findByMatricula(matricula);
+        verifyNoMoreInteractions(cocheRepository);
     }
 
 
@@ -85,6 +92,6 @@ public class CocheServiceTest {
         String matricula = "123-2132";
         assertThrows(IllegalArgumentException.class, () -> {
             cocheService.buscarCoche("123-241"); });
-        verifyNoMoreInteractions(cocheRepository.findByMatricula(matricula),cocheService.buscarCoche(matricula));
+        verifyNoInteractions(cocheRepository);
     }
     }
