@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
-public class CocheServiceTest {
     @ExtendWith(MockitoExtension.class)
+public class CocheServiceTest {
     private CocheService cocheService;
    @Mock
     private CocheRepository cocheRepository;
@@ -69,7 +69,7 @@ public class CocheServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {
             cocheService.comprarCoche(coche);
         });
-            verifyNoMoreInteractions(cocheService);
+            verifyNoMoreInteractions(cocheRepository);
     }
 
     @Test
