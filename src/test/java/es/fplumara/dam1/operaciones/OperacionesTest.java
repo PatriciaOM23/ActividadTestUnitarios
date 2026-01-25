@@ -18,7 +18,7 @@ public class OperacionesTest {
             "0.0, 'INSUFICIENTE'",
             "4.99, 'INSUFICIENTE'",
             "5.0, 'APROBADO'",
-            "6.99, 'APROBAD0'",
+            "6.99, 'APROBADO'",
             "7.0, 'NOTABLE'",
             "8.99, 'NOTABLE'",
             "9.0, 'SOBRESALIENTE'",
