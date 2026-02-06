@@ -10,24 +10,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-
+@ExtendWith(MockitoExtension.class)
 public class FacturaServiceTest {
-    @ExtendWith(MockitoExtension.class)
 
+    FacturaService facturaService;
     @Mock
-    private Calculadora calculadora;
-
-    private FacturaService facturaService;
-
-    @BeforeEach
-    public void setUp() {
-      facturaService = new FacturaService(calculadora);
-    }
+    Calculadora calculadora;
 
     @Test
     @DisplayName("Que totalConIva(100) devuelve 121 ")
     void comprobarTotalConIva(){
-    //DEVUELVE 121 -- COMPORTAMIENTO
+        //DEVUELVE 121 -- COMPORTAMIENTO
         when(calculadora.sumar(100, 21)).thenReturn(121);
         when(calculadora.sumar(0,21)).thenReturn(21);
 
@@ -43,6 +36,5 @@ public class FacturaServiceTest {
 
         verifyNoMoreInteractions(calculadora);
     }
-
 
 }
